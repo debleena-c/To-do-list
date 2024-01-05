@@ -44,39 +44,17 @@ function renderTodos(){
     todoList.appendChild(todoItem);
 
     todoDeleteButton.addEventListener('click', () => deleteTodo(todo.id));
-    if (todo.completed) {
-      todoItem.classList.add('completed');
-    }
+    
   })
 }
-function toggleCompleted(id) {
-  todos = todos.map(todo => {
-    if (todo.id === id) {
-      todo.completed = !todo.completed;
-    }
 
-    return todo;
-  });
+
+
+function deleteTodo(todoId) {
+  todos = todos.filter((item) => todoId !== item.id);
 
   renderTodos();
 }
-
-function deleteTodo(id) {
-  todos = todos.filter(todo => todo.id !== id);
-
-  renderTodos();
-}
-
-
-// () => deleteTodo(){
-  
-// }
-
-// function deleteTodo(todoId){
-//   todos.filter(item => todoId !== item.id);
-//   renderTodos();
-// }
-
 
 
 
