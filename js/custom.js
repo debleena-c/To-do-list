@@ -3,7 +3,7 @@ todoInput = document.querySelector("#todo-input");
 addButton = document.querySelector("#add-button");
 todoList = document.querySelector("#todo-list");
 
-todos = [];
+let todos = [];
 
 form.addEventListener('submit', e =>{
   e.preventDefault();
@@ -18,7 +18,6 @@ function addTodo(){
     todo = {
       id: Date.now(),
       text: todoText,
-      completed: false
     };
     todos.push(todo);
 
@@ -30,7 +29,7 @@ function addTodo(){
 
 function renderTodos(){
   todoList.innerHTML = "";
-
+  console.log(todos);
   todos.forEach(todo => {
     const todoItem = document.createElement('li');
     const todoText = document.createElement('span');
@@ -43,11 +42,40 @@ function renderTodos(){
     todoItem.appendChild(todoDeleteButton);
 
     todoList.appendChild(todoItem);
+
+    todoDeleteButton.addEventListener('click', () => deleteTodo(todo.id));
+    if (todo.completed) {
+      todoItem.classList.add('completed');
+    }
   })
+}
+function toggleCompleted(id) {
+  todos = todos.map(todo => {
+    if (todo.id === id) {
+      todo.completed = !todo.completed;
+    }
+
+    return todo;
+  });
+
+  renderTodos();
+}
+
+function deleteTodo(id) {
+  todos = todos.filter(todo => todo.id !== id);
+
+  renderTodos();
 }
 
 
+// () => deleteTodo(){
+  
+// }
 
+// function deleteTodo(todoId){
+//   todos.filter(item => todoId !== item.id);
+//   renderTodos();
+// }
 
 
 
